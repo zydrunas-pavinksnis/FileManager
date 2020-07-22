@@ -6,87 +6,62 @@
     <title>File viewer</title>
 </head>
 <body>
+
+<input type="button" value="Back" onclick="window.history.back()">
+
     <?php
-        $dir = "./home/";
-        $files1 = scandir($dir);
-    
-        // print_r($files1);      
-
-        function showTable ($mas){
-            foreach ($mas as $val) {
-                GLOBAL $dir;
-                $firstCol = "";
-                $secondCol = "";
-                $thirdCol = "";
-
-                if ($val == "."||$val == "..") {
-                    continue;
-                }
-
-                // <a href="url">$val</a>
-
-    //             <form action="index.php" method="POST">
-    //     <label for="height">Ugis (centimetrais):</label><br>
-    //     <input type="number" id="height" name="height"><br>
-    //     <label for="weight">Svoris (kg):</label><br>
-    //     <input type="number" id="weight" name="weight"><br>
-    //     <br>
-    //     <!-- <input type="radio" id="vyras" name="lytis" value="vyras">
-    //     <label for="vyras">Vyras</label><br>
-    //     <input type="radio" id="moteris" name="lytis" value="moteris">
-    //     <label for="moteris">Moteris</label><br>
-    //     <br> -->
-    //     <input type="submit" value="Ivesti">
-    // </form>
-
-                if (is_dir($dir . $val)) {
-                    $firstCol = "<td>dir</td>";
-                    $secondCol = "<td>
-
-                    <form action='index.php' method='POST'>
-
-                    <label for='fname'>First name:</label><br>
-
-                    <input type='submit' value='$val'>
-
-                    </form>
-                    
-                    <!-- <a href=$dir".$val.">$val</a> -->
-                     </td>";
-                    $thirdCol = "<td></td>";
-                } elseif (is_file($dir . $val)){
-                    $firstCol = "<td>file</td>";
-                    $secondCol = "<td> $val </td>";
-                    $thirdCol = "<td>delete, download</td>";
-                }
-                
-
-                $row = "<tr> $firstCol $secondCol $thirdCol </tr>";
-                echo $row;
-
-
-            }
-
-
+        
+        if (isset($_GET["a"])) {
+            $path = "./home/".$_GET["a"];
+        } else {
+            $path = "./home/";
         }
 
-        
+        $files1 = scandir($path);
+    
+                
+        echo "<table>
+        <tr>
+            <th>type</th>
+            <th>name</th>
+            <th>actions</th>
+        </tr>";
+
+        foreach ($files1 as $val) {            
+
+            if ($val === "."||$val === "..") {
+                continue;
+            }
+            echo "<tr>";
+            
+
+            if (is_dir($path.'/'.$val)) {
+
+            if (isset($_GET["a"])) {
+                $url = '?a='.$_GET["a"].'/'.$val;
+            } else {
+                $url = '?a='.$val;
+            }
+
+            echo "<td>dir</td>
+            <td><a href='".$url."'>".$val."</a></td>
+            <td></td>";
+                      
+            } else {
+                echo "<td>file</td>
+                <td> $val </td>
+                <td>delete, download</td>";                
+            }           
+            echo "</tr>";
+        }
+        echo "</table>"; 
     ?>
 
-<h4>File manager</h4>
+
 
     
 
-<table>
-<tr>
-    <th>type</th>
-    <th>name</th>
-    <th>actions</th>
-</tr>
-<?php showTable($files1);  ?>
-</table>
 
-<!-- jhgjg -->
     
 </body>
 </html>
