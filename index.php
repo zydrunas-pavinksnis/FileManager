@@ -41,7 +41,15 @@
                 }
                 echo "<td>dir</td> <td><a href='".$url."'>".$val."</a> </td><td></td>";                      
             } else {
-                echo "<td>file</td> <td> $val </td> <Td>delete, download".$path."</td>";                
+                $delFileName = $path."/".$val;
+                                
+                echo "<td>file</td> <td> $val </td>";
+                echo '<td>
+                <form action="" method="POST">
+                <input type="text"  name="delPath" value="'.$delFileName.'">
+                <input type="submit" value="delete">
+                </form>              
+                </td>';                
             }           
             echo "</tr>";
         }
@@ -50,11 +58,15 @@
             
 
         if (isset($_POST['newdir'])) {
-
             $newDir = $_POST['path'].'/'.$_POST['newdir'];
             mkdir($newDir);
-            header("Refresh:0");
-                      
+            header("Refresh:0");                      
+        }
+
+        if (isset($_POST['delPath'])) {
+            $delFile = $_POST['delPath'];
+            unlink($delFile);
+            header("Refresh:0");                      
         }
 
         
