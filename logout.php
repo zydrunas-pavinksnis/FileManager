@@ -8,18 +8,8 @@
         header("Location: index.php");
     }
     else {
-
-        echo '<form action="index.php" method="GET">
-                 
-            <input type="submit" value="logout">
-        </form>';
-
-        echo ("<br>");
-
-        
-        
-
-
-}
-
+        echo '<form action="index.php" method="GET">                 
+                <input type="submit" value="logout">
+              </form><br>';
+    }
 ?>

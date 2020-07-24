@@ -21,9 +21,8 @@
                 ) {
                   $_SESSION['logged_in'] = true;
                   $_SESSION['timeout'] = time();
-                  $_SESSION['username'] = 'Vartotojas';
-                  
-                  header("Location: logic.php");
+                  $_SESSION['username'] = 'Vartotojas';                  
+                  header("Location: action.php");
                } else {
                   $msg = 'username or password is WRONG. please repeat';
                }

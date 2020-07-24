@@ -71,9 +71,7 @@
             $delFile = $_POST['delPath'];
             unlink($delFile);
             header("Refresh:0");                      
-        }
-
-        
+        } 
         
         
     ?>
