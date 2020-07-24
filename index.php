@@ -25,7 +25,7 @@
                   
                   header("Location: logic.php");
                } else {
-                  $msg = 'Wrong username or password';
+                  $msg = 'username or password is WRONG. please repeat';
                }
             }
         ?>
@@ -35,6 +35,8 @@
             <input type = "text" name = "username" placeholder = "Vartotojas" required autofocus></br>
             <input type = "password" name = "password" placeholder = "5432" required>
             <input type = "submit" name = "login" value = "login">
+            <br><br>
+            <div><?php echo $msg; ?></div>            
         </form>
       </div> 
 
